@@ -25,19 +25,20 @@ SECRET_KEY = 'django-insecure-z&2yf=#(u1k)!#0)2xm84)f)!-57r21dco*1%f8vd)7^(_vig=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "testserver"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
-     "polls.apps.PollsConfig",
+    "polls.apps.PollsConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "debug_toolbar", 
 ]
 
 MIDDLEWARE = [
@@ -48,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware", 
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -55,8 +57,8 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],  
-        'APP_DIRS': True,  
+        "DIRS": [BASE_DIR / "templates"],  
+        "APP_DIRS": True,  
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -103,6 +105,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Internationalization
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
@@ -117,8 +123,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
-
+STATIC_URL = "static/"
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
